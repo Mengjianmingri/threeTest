@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rxz.dao.StudentDao">
+    <insert id="add" parameterType="rxz.pojo.Student">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select last_insert_id()
+        </selectKey>
+        insert into student (name, city ,age) values(#{name},#{city} ,#{age})
+    </insert>
+
+    <select id="findAll" resultType="rxz.pojo.Student">
+        select id,name,city,age from student
+    </select>
+
+    <update id="updateById" parameterType="rxz.pojo.Student">
+        update student
+        <set>
+            <if test="age!=null">
+                age=#{age},
+            </if>
+            <if test="city!=null">
+                city=#{city},
+            </if>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        delete from student where id = #{id}
+    </delete>
+</mapper>
