@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rxz.dao.ExcelDao">
+    <resultMap id="userMap" type="rxz.pojo.User">
+        <result column="id" property="id"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="birthday" property="birthday"></result>
+        <collection property="orderList" ofType="rxz.pojo.Order">
+            <result column="oid" property="oid"></result>
+            <result column="ordertime" property="ordertime"></result>
+            <result column="total" property="total"></result>
+        </collection>
+    </resultMap>
+    <select id="export" resultMap="userMap">
+        select u.* ,o.oid,o.ordertime,o.total
+            from user u left join orders o
+            on o.oid = u.id
+    </select>
+
+    <insert id="importExcel" parameterType="rxz.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user (id,username,password,birthday) values (#{id},#{username},#{password},#{birthday})
+    </insert>
+    <insert id="importOrder" parameterType="rxz.pojo.Order">
+        insert into orders (oid,ordertime,total,uid) values (#{oid},#{ordertime},#{total},#{uid})
+    </insert>
+    <select id="findOrdersByUid" parameterType="int" resultType="rxz.pojo.Order">
+        select * from orders where uid = #{uid}
+    </select>
+</mapper>

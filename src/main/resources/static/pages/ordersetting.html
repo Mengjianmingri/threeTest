@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 页面meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>test02_rxz</title>
+        <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="../plugins/elementui/index.css">
+        <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/orderset.css">
+        <!-- 引入组件库 -->
+        <script src="../js/vue.js"></script>
+        <script src="../plugins/elementui/index.js"></script>
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script src="../js/axios-0.18.0.js"></script>
+    </head>
+    <body class="hold-transition">
+    <div id="app">
+        <div class="content-header">
+            <h1>Test02<small>rxz</small></h1>
+        </div>
+        <div class="app-container">
+            <div class="box">
+                <div class="box ordersetting">
+                    <el-card class="box-card">
+                        <div class="boxMain">
+                            <el-button style="margin-bottom: 20px;margin-right: 20px" type="primary" @click="downloadTemplate()">模板下载</el-button>
+                            <el-upload action="/excel/import"
+                                       name="excelFile"
+                                       :show-file-list="false"
+                                       :on-success="handleSuccess"
+                                       :before-upload="beforeUpload">
+                                <el-button type="primary">上传文件</el-button>
+                            </el-upload>
+                            <div>  </div>
+                            <div>  </div>
+                            <div>  </div>
+                            <el-button style="margin-bottom: 20px;margin-right: 20px" type="primary" @click="downloadData()">下载数据</el-button>
+                        </div>
+                        <div>
+                            操作说明：请点击"模板下载"按钮获取模板文件，在模板文件中录入数据后点击"上传文件"按钮上传模板文件,点击"下载数据"按钮获取当前表中数据。
+                        </div>
+                    </el-card>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    <!-- 引入组件库 -->
+    <script src="../js/vue.js"></script>
+    <script src="../plugins/elementui/index.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="../js/ordersetting.js"></script>
+</html>
